@@ -197,17 +197,18 @@ p {
             </div>
             
             <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link">https://x.com/the_sumeet156<i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link">https://github.com/sumeet156<i class="fab fa-github"></i></a>
+                <a href="#" class="social-link">https://linkedin.com/in/sumeetdc<i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link">https://www.instagram.com/the_sumeet<i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
 
-    <script src="script.js">// Set the date we're counting down to (1 month from now)
+    <script src="script.js">
+// Set the date we're counting down to (30 days from now)
 const countDownDate = new Date();
-countDownDate.setMonth(countDownDate.getMonth() + 1);
+countDownDate.setDate(countDownDate.getDate() + 30);
 
 // Update the countdown every 1 second
 const countdownFunction = setInterval(function() {
@@ -236,6 +237,7 @@ const countdownFunction = setInterval(function() {
         document.getElementById("hours").innerHTML = "00";
         document.getElementById("minutes").innerHTML = "00";
         document.getElementById("seconds").innerHTML = "00";
+        document.querySelector("h2").textContent = "sumthing.me is live now!";
     }
 }, 1000);
 </script>
