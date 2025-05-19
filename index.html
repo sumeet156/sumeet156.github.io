@@ -205,40 +205,46 @@
     </div>
 
     <script>
-        // Set the launch date (30 days from now)
-        const launchDate = new Date();
+        // Check if we already have a launch date stored
+    let launchDate;
+    const storedDate = localStorage.getItem('sumthingLaunchDate');
+    
+    if (storedDate) {
+        // Use the stored date if available
+        launchDate = new Date(storedDate);
+    } else {
+        // Set new launch date (30 days from now) and store it
+        launchDate = new Date();
         launchDate.setDate(launchDate.getDate() + 30);
+        localStorage.setItem('sumthingLaunchDate', launchDate.toString());
+    }
 
-        // Update the countdown every 1 second
-        const countdownFunction = setInterval(function() {
-            // Get current date and time
-            const now = new Date().getTime();
-            
-            // Calculate remaining time
-            const distance = launchDate - now;
-            
-            // Time calculations
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Display the result
-            document.getElementById("days").textContent = days.toString().padStart(2, '0');
-            document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
-            
-            // When countdown is finished
-            if (distance < 0) {
-                clearInterval(countdownFunction);
-                document.getElementById("days").textContent = "00";
-                document.getElementById("hours").textContent = "00";
-                document.getElementById("minutes").textContent = "00";
-                document.getElementById("seconds").textContent = "00";
-                document.querySelector("h2").textContent = "sumthing.me is live now!";
-            }
-        }, 1000);
+    // Update the countdown every 1 second
+    const countdownFunction = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = launchDate - now;
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        document.getElementById("days").textContent = days.toString().padStart(2, '0');
+        document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+        
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            document.getElementById("days").textContent = "00";
+            document.getElementById("hours").textContent = "00";
+            document.getElementById("minutes").textContent = "00";
+            document.getElementById("seconds").textContent = "00";
+            document.querySelector("h2").textContent = "sumthing.me is live now!";
+            // Optional: Remove the stored date after launch
+            localStorage.removeItem('sumthingLaunchDate');
+        }
+    }, 1000);
     </script>
 </body>
 </html>
